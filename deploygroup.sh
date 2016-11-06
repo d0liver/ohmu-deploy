@@ -18,14 +18,8 @@
 # load helper functions
 source $(dirname "$0")/deploy_utilities.sh
 
-log_and_echo "Attempting to update cf ic..."
-ice_retry update
-if [ $? -eq 0 ]
-	log_and_echo "cf ic successfully updated."
-else
-	log_and_echo "cf ic update failed - aborting."
-	exit 1
-fi
+# Run the IC_COMMAND to show us what plug-in commands are available
+$IC_COMMAND
 
 debugme() {
   [[ $DEBUG = 1 ]] && "$@" || :
