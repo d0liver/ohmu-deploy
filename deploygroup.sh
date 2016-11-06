@@ -265,6 +265,9 @@ deploy_group() {
     RESULT=$?
     if [ $RESULT -eq 0 ]; then
 
+		# Try to bind the mysql service
+		ice_retry bind-service "$MY_GROUP_NAME" mysql
+
         # call the POST_DEPLOY_GROUP hook (if defined)
         if [ -n "${POST_DEPLOY_GROUP}" ]; then
             log_and_echo "$INFO" "POST_DEPLOY_GROUP hook is defined - ${POST_DEPLOY_GROUP}"
